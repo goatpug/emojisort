@@ -396,6 +396,29 @@ level, per-level `{ solved, bestMoves, gotPar, usedRescue }`, seen-tooltips, and
 settings. Levels unlock sequentially; level select shows all with locked-future levels
 greyed (players can replay anything unlocked).
 
+### 10.5 After the last level (v1 endgame)
+
+Finishing the final level must not dead-end on a "Next level" button with nowhere to
+go. Instead:
+
+- **Completion celebration.** Beating the last level for the first time shows a
+  one-time "You sorted everything! 🎉" screen: confetti drawn from *all* theme pools,
+  plus career stats — levels solved, pars hit (`X/36` 🏆), themes completed, total
+  moves, and rescue-free levels. Reachable afterwards from level select via a small
+  trophy button. (Everything needed is already in the §10.4 save data.)
+- **Par chasing is the designed endgame.** After the credits-moment, the results
+  screen's "Next level" is replaced by "Back to level select" on the final level, and
+  level select becomes the hub: every tile shows ⭐/🏆 so the remaining non-par levels
+  read as the open to-do list. When all 36 show 🏆, the completion screen upgrades to
+  a "perfect game" variant (e.g. gold styling).
+- **More levels are data, not code.** New level packs are just additional committed
+  JSON files plus an entry in the level index — no engine changes. The level list must
+  be data-driven (an ordered manifest, e.g. `levels/index.json`, rather than a
+  hardcoded count) so pack drops and the "final level" behavior above follow the
+  manifest automatically.
+- **Endless/daily play is v2** (§12): true infinite content requires generating and
+  solving levels in the browser, which v1 deliberately avoids.
+
 ## 11. Technical requirements
 
 - **Stack: vanilla HTML/CSS/JS (ES modules), no framework, no build step.** The repo
@@ -435,7 +458,15 @@ greyed (players can replay anything unlocked).
   "X-ray" (blind level at par). The v1 localStorage schema already records
   `gotPar`/`usedRescue` per level and should also record per-level completion **counts**
   and a per-attempt `usedUndo` flag at win, so v2 badges can be computed retroactively.
-- Daily generated level (seeded by date), theme packs, drag input, sound, service worker.
+- **Endless & daily play.** Runtime-generated levels: a daily level (RNG seeded by the
+  date string so every player gets the same deal, still with no backend) and/or an
+  endless mode with gently rising difficulty. Feasible because the solver already
+  shares the engine's move logic — port generator + solver to run in a **Web Worker**
+  so deals are validated and `par` computed in the browser without jank; cap
+  generation at sizes the solver handles quickly (`K ≤ 8`) and fall back to rerolling
+  slow deals. Committed levels stay the curated campaign; generated ones are extra.
+- Theme packs (new themes + level packs are pure data per §10.5), drag input, sound,
+  service worker for offline.
 
 ## 13. Acceptance checklist
 
@@ -449,4 +480,5 @@ greyed (players can replay anything unlocked).
 - [ ] Horizontal and vertical layouts both shippable; adjacency stable across screen sizes.
 - [ ] Six themes with distinct container skins and themed lock overlays + unlock animations.
 - [ ] Playable with keyboard; aria-labels on containers; reduced-motion respected.
+- [ ] Level list is manifest-driven; beating the final manifest level shows the completion screen (§10.5), with the perfect-game variant once all levels are at par.
 - [ ] Site works when served from `https://<user>.github.io/emojisort/` with no build step and no runtime network requests.
