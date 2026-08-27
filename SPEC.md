@@ -25,8 +25,10 @@ What makes this game distinct from a stock water-sort clone:
    animals, farm animals, flowers, office supplies, …), and the containers, background,
    and lock visuals are styled to match.
 2. **Locked containers** — some containers start locked and must be unlocked through
-   play (by fully sorting specific emoji types, or by completing a sort *adjacent* to
-   the lock). Lock artwork is theme-specific (vines for flowers, a cage for safari…).
+   play: a container **concealed behind an opaque themed cover** until one named
+   emoji type is fully sorted, or a container behind a see-through barrier that
+   opens when a sort is completed *adjacent* to it. Lock artwork is theme-specific
+   (a vine curtain for flowers, a canvas tarp and cage bars for safari…).
 3. **Blind levels** — some levels hide everything below the top emoji of each stack
    behind ❓ until revealed.
 4. **Generous assist tools** — unlimited undo, plus one "add a container" rescue per
@@ -95,18 +97,18 @@ Every level references a **theme**. A theme bundles:
 | `name` | display name | "Flower Garden" |
 | `emojiPool` | 8–14 emojis to draw level palettes from | 🌸 🌹 🌻 🌷 🌼 💐 🥀 🌺 🪻 🪷 |
 | `containerStyle` | which container skin to render (§5) | `vase` |
-| `lockStyle` | lock overlay + unlock animation (§4.5) | `vines` |
+| `lockStyle` | lock art: opaque cover (type A) + see-through barrier (type B) with unlock animations (§4.5) | `vines` |
 | `background` | CSS background (gradient/pattern, no image files needed) | soft green garden gradient |
 | `label` emoji | used in level select & results | 🌸 |
 
 **Launch themes (minimum 6):**
 
-1. **Aquatic** 🐠 — 🐠 🐙 🦀 🐬 🐡 🦑 🐢 🦈 🐳 🦞 · containers: fish tanks · lock: bubble dome
-2. **Farm** 🐄 — 🐄 🐖 🐔 🐑 🐴 🦆 🐐 🐰 🦃 🐝 · containers: barn stalls · lock: wooden gate + rope
-3. **Flowers** 🌸 — (above) · containers: vases · lock: tangled vines
-4. **Safari** 🦁 — 🦁 🐘 🦒 🦓 🦏 🐆 🦛 🦬 🐒 🦩 · containers: crates · lock: cage bars
-5. **Office** 📎 — 📎 ✏️ 📌 🖊️ 📏 ✂️ 📁 🖇️ 📐 🔖 · containers: desk organizers · lock: chained drawer with padlock
-6. **Sweets** 🍩 — 🍩 🍪 🧁 🍭 🍬 🍫 🍰 🍨 🥐 🍡 · containers: bakery boxes/jars · lock: gift-ribbon bow
+1. **Aquatic** 🐠 — 🐠 🐙 🦀 🐬 🐡 🦑 🐢 🦈 🐳 🦞 · containers: fish tanks · locks: closed clamshell cover / bubble barrier
+2. **Farm** 🐄 — 🐄 🐖 🐔 🐑 🐴 🦆 🐐 🐰 🦃 🐝 · containers: barn stalls · locks: closed barn doors / rope-tied gate
+3. **Flowers** 🌸 — (above) · containers: vases · locks: vine curtain / tangled vines
+4. **Safari** 🦁 — 🦁 🐘 🦒 🦓 🦏 🐆 🦛 🦬 🐒 🦩 · containers: crates · locks: canvas tarp / cage bars
+5. **Office** 📎 — 📎 ✏️ 📌 🖊️ 📏 ✂️ 📁 🖇️ 📐 🔖 · containers: desk organizers · locks: closed cabinet front / chained drawer
+6. **Sweets** 🍩 — 🍩 🍪 🧁 🍭 🍬 🍫 🍰 🍨 🥐 🍡 · containers: bakery boxes/jars · locks: gift-box lid / ribbon bow
 
 Themes are pure data + CSS; adding a theme must not require engine changes. Pick emojis
 that stay visually distinct at small sizes and render acceptably on Windows/Android/iOS
@@ -118,17 +120,32 @@ platforms and prefer emojis ≤ Unicode 13).
 ## 4. Locked containers
 
 Locks are the signature challenge mechanic. A locked container is **inert**: nothing can
-be poured into or out of it, and it renders with a theme-styled lock overlay. Locked
-containers may start **empty** (extra space you must earn) or **holding emojis** (their
-contents visible through the lock — e.g. behind cage bars — unless the level is also
-blind, §7).
+be poured into or out of it. Locked containers may start **empty** (extra space you must
+earn) or **holding emojis**. There are two lock types with deliberately different
+visual language: type A **conceals** the container entirely (you can't see what's
+inside — or even how useful it will be — until it opens), while type B is a
+**see-through barrier** (contents visible but frozen).
 
-### 4.1 Lock type A — "sort-to-unlock"
+### 4.1 Lock type A — "concealed until sorted"
 
-The lock names **one or two emoji types** (shown as small icons on the lock itself,
-e.g. a cage with a small 🦓+🦒 tag). The container unlocks the moment **every named
-type is fully sorted** (each named type completely fills some container). One or two
-types only — more than two makes the goal noise.
+The container is completely hidden behind an **opaque themed cover** — a curtain,
+tent canvas, closed barn doors, a gift-box lid (§4.5) — drawn over the whole
+container. The cover carries a badge showing **exactly one emoji type** (e.g. a
+curtain with a 🦓 tag). The moment **all copies of that type are fully sorted**
+(the type completely fills some container), the cover lifts in a reveal animation
+and the container becomes visible and usable.
+
+- Exactly **one** required type per concealed container. At most **two** concealed
+  containers per level, each requiring a **different** type (e.g. one opens on 🦓,
+  another on 🦒).
+- What's behind the cover is part of the puzzle's tension: it may be empty (earned
+  space) or holding emojis (new work). The player learns which only at the reveal.
+- Hard authoring rule: a concealed container must not contain any copies of **its
+  own** required type (that would be unopenable), and two concealed containers must
+  not mutually trap each other's required types. The solver check in §4.4 catches
+  both, but the generator should reject these shapes outright.
+- On reveal in a **blind** level (§7), the revealed container follows normal blind
+  rules: its top emoji shows, the rest are ❓.
 
 ### 4.2 Lock type B — "unlock-by-neighbor"
 
@@ -149,7 +166,9 @@ including lock state (§6.1).
 
 ### 4.4 Design constraints for levels with locks
 
-- A level may mix lock types but should ship with at most 3 locked containers.
+- At most **2 concealed (type A)** containers per level, each with a different
+  required type. A level may mix lock types but should ship with at most 3 locked
+  containers total.
 - Solvability rule: the generator/solver must verify the level is winnable, which
   inherently proves every lock that *must* open (any lock holding emojis, and any lock
   whose space is needed) *can* open. Locks that never open are forbidden — every locked
@@ -159,20 +178,27 @@ including lock state (§6.1).
 
 ### 4.5 Lock visuals & unlock moment
 
-Each theme defines a `lockStyle` rendered as an overlay on the container:
+Each theme's `lockStyle` defines **two variants of one motif**: an opaque **cover**
+for type A (must fully conceal the container) and a see-through **barrier** for
+type B (contents visible behind it):
 
-- **vines** (Flowers): tangled green vines wrapped over the vase; unlock = vines wilt/slide away.
-- **cage** (Safari): bars over the crate; unlock = door swings open.
-- **bubble** (Aquatic): a shimmering bubble dome; unlock = pop.
-- **gate** (Farm): rope-tied gate; unlock = rope falls, gate swings.
-- **padlock+chain** (Office): chain across the drawer; unlock = chain drops.
-- **ribbon** (Sweets): gift ribbon and bow; unlock = bow unties.
+| Theme | Type A cover (opaque, conceals) | Type B barrier (see-through) |
+|---|---|---|
+| Flowers | dense hedge / drawn vine curtain; reveal = curtain of vines parts and wilts away | tangled vines wrapped over the vase; unlock = vines slide off |
+| Safari | canvas tent / tarp over the crate; reveal = tarp whips away | cage bars; unlock = door swings open |
+| Aquatic | closed giant clamshell 🐚 / seaweed curtain; reveal = shell opens | shimmering bubble dome; unlock = pop |
+| Farm | closed barn doors; reveal = doors swing open | rope-tied gate; unlock = rope falls |
+| Office | closed cabinet front; reveal = rolls up like a tambour door | chain + padlock across the tray; unlock = chain drops |
+| Sweets | gift box with lid; reveal = lid pops off | ribbon and bow; unlock = bow unties |
 
 Implementation guidance: build these as CSS/SVG (inline SVG preferred) with a short
-(≤600ms) unlock animation and a small burst of theme confetti (the theme's label emoji).
-No raster image assets — keeps the repo light and GitHub Pages fast. Type A locks
-render their required emoji(s) as a small tag on the overlay; type B locks render a
-small "→ neighbor" affordance (e.g. tendrils/arrows toward adjacent containers).
+(≤600ms) unlock/reveal animation and a small burst of theme confetti (the theme's
+label emoji). No raster image assets — keeps the repo light and GitHub Pages fast.
+Type A covers render their required emoji as a **badge** front-and-center on the
+cover (like the vial badge in water-sort games); type B barriers render a small
+"→ neighbor" affordance (e.g. tendrils/arrows toward adjacent containers). The
+type A reveal is the level's showpiece moment — give it the most polish (cover
+animates open, container pops in with a slight bounce).
 
 ---
 
@@ -269,9 +295,10 @@ vertical suits tanks/vases. Roughly 1 in 4 levels should be horizontal.
   is blind, the instance is not top-of-stack, and its id is not in `revealed`.
   Any instance that was visible at any moment — including mid-pour — counts as
   revealed.
-- Blind levels **cannot** also contain locked containers holding emojis whose contents
-  matter for lock tags (type A tags stay readable since they're on the lock, not the
-  contents). Blind + locks is allowed and encouraged for late levels; blind is
+- Locks compose cleanly with blind: type A containers are concealed entirely until
+  revealed, then follow blind rules (§4.1); type B containers show their contents
+  behind the barrier under the same blind rules as everything else (top visible,
+  rest ❓). Blind + locks is allowed and encouraged for late levels; blind is
   introduced solo first.
 - Level select marks blind levels with 🕶️.
 
@@ -372,8 +399,9 @@ Shipped levels are static JSON (hand-tuned or generator-produced, then committed
 }
 ```
 
-- `stack` is bottom→top. `lock.type` is `"sort"` (with `requires`: 1–2 emojis) or
-  `"neighbor"`. `rowBreaks` lists container indices that start a new row/column.
+- `stack` is bottom→top. `lock.type` is `"sort"` (with `requires`: exactly one
+  emoji; the container renders concealed per §4.1) or `"neighbor"`. `rowBreaks`
+  lists container indices that start a new row/column.
 - Loading validates: emoji counts are exactly `capacity` per type, locks reference
   emojis present in the level, `par` present, level solvable is trusted from the
   validation script (don't solve at runtime).
@@ -478,7 +506,7 @@ go. Instead:
 - [ ] Rescue container: capacity 2, once per attempt, marks assisted, excluded from adjacency.
 - [ ] Results screen shows par comparison and replay; best results persist and render on level select.
 - [ ] Horizontal and vertical layouts both shippable; adjacency stable across screen sizes.
-- [ ] Six themes with distinct container skins and themed lock overlays + unlock animations.
+- [ ] Six themes with distinct container skins and themed lock art — opaque type A covers (fully concealing, with required-emoji badge) and see-through type B barriers — each with unlock/reveal animations.
 - [ ] Playable with keyboard; aria-labels on containers; reduced-motion respected.
 - [ ] Level list is manifest-driven; beating the final manifest level shows the completion screen (§10.5), with the perfect-game variant once all levels are at par.
 - [ ] Site works when served from `https://<user>.github.io/emojisort/` with no build step and no runtime network requests.
