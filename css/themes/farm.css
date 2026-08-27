@@ -1,0 +1,17 @@
+#screen-game[data-theme='farm'] .board {
+  --board-bg: linear-gradient(180deg, #cdeab0, #7fb955);
+  background: var(--board-bg);
+}
+#screen-game[data-theme='farm'] .container {
+  background: repeating-linear-gradient(90deg, #e8c896, #e8c896 10px, #dcb87f 10px, #dcb87f 12px);
+  border-color: #7a4c22;
+  border-radius: 6px;
+}
+#screen-game[data-theme='farm'] .lock-cover {
+  --lock-cover-bg: repeating-linear-gradient(90deg, #7a4c22, #7a4c22 10px, #5c3717 10px, #5c3717 12px);
+  border: 3px solid #43290f;
+}
+#screen-game[data-theme='farm'] .lock-barrier {
+  --lock-barrier-bg: repeating-linear-gradient(45deg, rgba(120, 78, 30, 0.55) 0 6px, rgba(160, 110, 50, 0.35) 6px 16px);
+  border: 2px solid #6b4420;
+}

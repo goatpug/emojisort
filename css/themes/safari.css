@@ -1,0 +1,20 @@
+#screen-game[data-theme='safari'] .board {
+  --board-bg: linear-gradient(180deg, #f2debb, #d8a95f);
+  background: var(--board-bg);
+}
+#screen-game[data-theme='safari'] .container {
+  background: repeating-linear-gradient(0deg, #d9a86a, #d9a86a 12px, #c6924f 12px, #c6924f 14px);
+  border-color: #6b4420;
+  border-radius: 4px;
+}
+#screen-game[data-theme='safari'] .container.horizontal {
+  background: repeating-linear-gradient(90deg, #d9a86a, #d9a86a 12px, #c6924f 12px, #c6924f 14px);
+}
+#screen-game[data-theme='safari'] .lock-cover {
+  --lock-cover-bg: repeating-linear-gradient(45deg, #b0a184, #b0a184 10px, #8f8168 10px, #8f8168 20px);
+  border: 3px solid #5c5340;
+}
+#screen-game[data-theme='safari'] .lock-barrier {
+  --lock-barrier-bg: repeating-linear-gradient(90deg, rgba(40, 30, 15, 0.6) 0 4px, transparent 4px 16px);
+  border: 2px solid #3a2c15;
+}

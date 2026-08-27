@@ -1,0 +1,17 @@
+#screen-game[data-theme='sweets'] .board {
+  --board-bg: linear-gradient(180deg, #ffe3ee, #ffc2d9);
+  background: var(--board-bg);
+}
+#screen-game[data-theme='sweets'] .container {
+  background: linear-gradient(180deg, #fffaf6, #ffeef5);
+  border: 2px dashed #e0729f;
+  border-radius: 10px;
+}
+#screen-game[data-theme='sweets'] .lock-cover {
+  --lock-cover-bg: linear-gradient(180deg, #ff9ec2, #f269a0);
+  border: 3px solid #c94a7c;
+}
+#screen-game[data-theme='sweets'] .lock-barrier {
+  --lock-barrier-bg: repeating-linear-gradient(45deg, rgba(242, 105, 160, 0.5) 0 6px, rgba(255, 210, 228, 0.35) 6px 16px);
+  border: 2px dashed #f269a0;
+}

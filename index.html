@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>EmojiSort</title>
+  <meta name="description" content="A water-sort style puzzle game where you sort themed emojis." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧃</text></svg>" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/themes/aquatic.css" />
+  <link rel="stylesheet" href="css/themes/farm.css" />
+  <link rel="stylesheet" href="css/themes/flowers.css" />
+  <link rel="stylesheet" href="css/themes/safari.css" />
+  <link rel="stylesheet" href="css/themes/office.css" />
+  <link rel="stylesheet" href="css/themes/sweets.css" />
+</head>
+<body>
+  <div id="app" aria-live="polite">
+    <!-- Level select -->
+    <section id="screen-select" class="screen" hidden>
+      <header class="select-header">
+        <h1>🧃 EmojiSort</h1>
+        <button id="btn-trophy" class="icon-button" title="Your stats" aria-label="View your stats">🏆</button>
+      </header>
+      <div id="level-grid" class="level-grid" role="list"></div>
+    </section>
+
+    <!-- Game board -->
+    <section id="screen-game" class="screen" hidden>
+      <header class="game-header">
+        <button id="btn-back" class="icon-button" aria-label="Back to level select">⬅️</button>
+        <div class="game-title">
+          <span id="level-name"></span>
+          <span id="move-count" class="move-count">0 moves</span>
+        </div>
+        <button id="btn-help" class="icon-button" aria-label="How to play">❔</button>
+      </header>
+
+      <div id="board" class="board" role="list" aria-label="Game board"></div>
+
+      <footer class="game-footer">
+        <button id="btn-undo" class="tool-button" aria-label="Undo last move">↩️ Undo</button>
+        <button id="btn-restart" class="tool-button" aria-label="Restart level">🔄 Restart</button>
+        <button id="btn-rescue" class="tool-button" aria-label="Add a rescue container">➕ Rescue</button>
+      </footer>
+
+      <div id="deadend-banner" class="banner" role="alert" hidden>
+        <p>No moves left! 🙈</p>
+        <div class="banner-actions">
+          <button id="deadend-undo" class="tool-button">↩️ Undo</button>
+          <button id="deadend-restart" class="tool-button">🔄 Restart</button>
+          <button id="deadend-rescue" class="tool-button">➕ Add rescue container</button>
+        </div>
+      </div>
+
+      <div id="tooltip-banner" class="banner tooltip-banner" hidden>
+        <p id="tooltip-text"></p>
+        <button id="tooltip-dismiss" class="tool-button">Got it</button>
+      </div>
+    </section>
+
+    <!-- Results overlay -->
+    <div id="overlay-results" class="overlay" hidden>
+      <div class="overlay-card" role="dialog" aria-modal="true" aria-labelledby="results-title">
+        <div id="results-confetti" class="confetti" aria-hidden="true"></div>
+        <h2 id="results-title">🎉 Solved!</h2>
+        <p id="results-moves"></p>
+        <p id="results-par"></p>
+        <div class="overlay-actions">
+          <button id="results-replay" class="tool-button">🔁 Replay</button>
+          <button id="results-next" class="tool-button primary">➡️ Next level</button>
+          <button id="results-select" class="tool-button">📋 Level select</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Completion overlay -->
+    <div id="overlay-completion" class="overlay" hidden>
+      <div class="overlay-card" role="dialog" aria-modal="true" aria-labelledby="completion-title">
+        <div id="completion-confetti" class="confetti" aria-hidden="true"></div>
+        <h2 id="completion-title">🎉 You sorted everything!</h2>
+        <div id="completion-stats" class="stats"></div>
+        <div class="overlay-actions">
+          <button id="completion-close" class="tool-button primary">📋 Back to level select</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

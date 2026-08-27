@@ -1,0 +1,17 @@
+#screen-game[data-theme='office'] .board {
+  --board-bg: linear-gradient(180deg, #dfe3e8, #b7bfc9);
+  background: var(--board-bg);
+}
+#screen-game[data-theme='office'] .container {
+  background: linear-gradient(180deg, #f7f8fa, #e4e7eb);
+  border-color: #7d8794;
+  border-radius: 6px;
+}
+#screen-game[data-theme='office'] .lock-cover {
+  --lock-cover-bg: linear-gradient(180deg, #8f98a3, #5f6975);
+  border: 3px solid #40474f;
+}
+#screen-game[data-theme='office'] .lock-barrier {
+  --lock-barrier-bg: repeating-linear-gradient(60deg, rgba(60, 65, 72, 0.6) 0 4px, transparent 4px 12px);
+  border: 2px solid #4c525a;
+}

@@ -1,0 +1,80 @@
+{
+  "id": "safari-16",
+  "index": 16,
+  "theme": "safari",
+  "orientation": "vertical",
+  "capacity": 4,
+  "blind": false,
+  "rowBreaks": [
+    5
+  ],
+  "containers": [
+    {
+      "stack": [
+        "🦁",
+        "🦁",
+        "🦒",
+        "🦓"
+      ]
+    },
+    {
+      "stack": [
+        "🦏",
+        "🐘",
+        "🐘",
+        "🦓"
+      ]
+    },
+    {
+      "stack": [
+        "🦒",
+        "🦒",
+        "🦏",
+        "🦁"
+      ]
+    },
+    {
+      "stack": [
+        "🦓",
+        "🦏",
+        "🦛",
+        "🦒"
+      ]
+    },
+    {
+      "stack": [
+        "🐘",
+        "🐘",
+        "🦛",
+        "🐆"
+      ]
+    },
+    {
+      "stack": [
+        "🐆",
+        "🐆",
+        "🦁",
+        "🦓"
+      ]
+    },
+    {
+      "stack": [
+        "🦛",
+        "🦛",
+        "🐆",
+        "🦏"
+      ]
+    },
+    {
+      "stack": []
+    },
+    {
+      "stack": [],
+      "lock": {
+        "type": "sort",
+        "requires": "🦛"
+      }
+    }
+  ],
+  "par": 16
+}

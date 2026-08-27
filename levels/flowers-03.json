@@ -1,0 +1,52 @@
+{
+  "id": "flowers-03",
+  "index": 3,
+  "theme": "flowers",
+  "orientation": "vertical",
+  "capacity": 4,
+  "blind": false,
+  "rowBreaks": [
+    5
+  ],
+  "containers": [
+    {
+      "stack": [
+        "🌻",
+        "🌹",
+        "🌹",
+        "🌷"
+      ]
+    },
+    {
+      "stack": [
+        "🌸",
+        "🌷",
+        "🌹",
+        "🌸"
+      ]
+    },
+    {
+      "stack": [
+        "🌻",
+        "🌹",
+        "🌷",
+        "🌸"
+      ]
+    },
+    {
+      "stack": [
+        "🌸",
+        "🌻",
+        "🌻",
+        "🌷"
+      ]
+    },
+    {
+      "stack": []
+    },
+    {
+      "stack": []
+    }
+  ],
+  "par": 12
+}

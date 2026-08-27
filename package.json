@@ -1,0 +1,13 @@
+{
+  "name": "emojisort",
+  "version": "1.0.0",
+  "description": "A water-sort style puzzle game where you sort themed emojis.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "validate-levels": "node tools/validate-levels.mjs",
+    "solve": "node tools/solver.mjs"
+  },
+  "license": "MIT"
+}

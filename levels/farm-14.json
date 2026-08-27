@@ -1,0 +1,72 @@
+{
+  "id": "farm-14",
+  "index": 14,
+  "theme": "farm",
+  "orientation": "vertical",
+  "capacity": 4,
+  "blind": false,
+  "rowBreaks": [
+    5
+  ],
+  "containers": [
+    {
+      "stack": [
+        "🦆",
+        "🦆",
+        "🐴",
+        "🐔"
+      ]
+    },
+    {
+      "stack": [
+        "🐖",
+        "🐖",
+        "🐑",
+        "🐔"
+      ],
+      "lock": {
+        "type": "sort",
+        "requires": "🐴"
+      }
+    },
+    {
+      "stack": [
+        "🐖",
+        "🦆",
+        "🐴",
+        "🐄"
+      ]
+    },
+    {
+      "stack": [
+        "🐑",
+        "🐔",
+        "🐄",
+        "🐖"
+      ]
+    },
+    {
+      "stack": [
+        "🐴",
+        "🐑",
+        "🦆",
+        "🐄"
+      ]
+    },
+    {
+      "stack": [
+        "🐔",
+        "🐄",
+        "🐴",
+        "🐑"
+      ]
+    },
+    {
+      "stack": []
+    },
+    {
+      "stack": []
+    }
+  ],
+  "par": 18
+}

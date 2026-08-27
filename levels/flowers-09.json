@@ -1,0 +1,66 @@
+{
+  "id": "flowers-09",
+  "index": 9,
+  "theme": "flowers",
+  "orientation": "horizontal",
+  "capacity": 4,
+  "blind": false,
+  "rowBreaks": [],
+  "containers": [
+    {
+      "stack": [
+        "🌸",
+        "🌹",
+        "🌻",
+        "🌻"
+      ]
+    },
+    {
+      "stack": [
+        "🌻",
+        "🌹",
+        "🌸",
+        "🌼"
+      ]
+    },
+    {
+      "stack": [
+        "💐",
+        "🌹",
+        "💐",
+        "🌼"
+      ]
+    },
+    {
+      "stack": [
+        "🌷",
+        "🌷",
+        "🌷",
+        "🌼"
+      ]
+    },
+    {
+      "stack": [
+        "🌷",
+        "💐",
+        "🌸",
+        "🌹"
+      ]
+    },
+    {
+      "stack": [
+        "🌼",
+        "💐",
+        "🌻",
+        "🌸"
+      ]
+    },
+    {
+      "stack": []
+    },
+    {
+      "stack": []
+    }
+  ],
+  "par": 17
+}

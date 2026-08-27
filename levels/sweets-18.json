@@ -1,0 +1,82 @@
+{
+  "id": "sweets-18",
+  "index": 18,
+  "theme": "sweets",
+  "orientation": "horizontal",
+  "capacity": 4,
+  "blind": false,
+  "rowBreaks": [],
+  "containers": [
+    {
+      "stack": [
+        "🍪",
+        "🍪",
+        "🍰",
+        "🧁"
+      ],
+      "lock": {
+        "type": "sort",
+        "requires": "🍬"
+      }
+    },
+    {
+      "stack": [
+        "🍭",
+        "🧁",
+        "🍩",
+        "🍫"
+      ]
+    },
+    {
+      "stack": [
+        "🍫",
+        "🍫",
+        "🍫",
+        "🍰"
+      ],
+      "lock": {
+        "type": "sort",
+        "requires": "🍪"
+      }
+    },
+    {
+      "stack": [
+        "🍭",
+        "🧁",
+        "🍩",
+        "🍩"
+      ]
+    },
+    {
+      "stack": [
+        "🍬",
+        "🧁",
+        "🍪",
+        "🍭"
+      ]
+    },
+    {
+      "stack": [
+        "🍬",
+        "🍬",
+        "🍪",
+        "🍭"
+      ]
+    },
+    {
+      "stack": [
+        "🍰",
+        "🍰",
+        "🍬",
+        "🍩"
+      ]
+    },
+    {
+      "stack": []
+    },
+    {
+      "stack": []
+    }
+  ],
+  "par": 18
+}

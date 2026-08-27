@@ -1,0 +1,66 @@
+{
+  "id": "flowers-27",
+  "index": 27,
+  "theme": "flowers",
+  "orientation": "horizontal",
+  "capacity": 4,
+  "blind": true,
+  "rowBreaks": [],
+  "containers": [
+    {
+      "stack": [
+        "🌼",
+        "🌻",
+        "🌼",
+        "🌷"
+      ]
+    },
+    {
+      "stack": [
+        "🌹",
+        "💐",
+        "🌻",
+        "🌷"
+      ]
+    },
+    {
+      "stack": [
+        "🌹",
+        "🌸",
+        "🌻",
+        "🌷"
+      ]
+    },
+    {
+      "stack": [
+        "🌸",
+        "🌹",
+        "🌹",
+        "🌸"
+      ]
+    },
+    {
+      "stack": [
+        "🌼",
+        "💐",
+        "🌸",
+        "🌻"
+      ]
+    },
+    {
+      "stack": [
+        "💐",
+        "💐",
+        "🌼",
+        "🌷"
+      ]
+    },
+    {
+      "stack": []
+    },
+    {
+      "stack": []
+    }
+  ],
+  "par": 18
+}

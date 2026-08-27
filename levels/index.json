@@ -1,0 +1,292 @@
+{
+  "levels": [
+    {
+      "id": "aquatic-01",
+      "index": 1,
+      "theme": "aquatic",
+      "par": 7,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "farm-02",
+      "index": 2,
+      "theme": "farm",
+      "par": 12,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "flowers-03",
+      "index": 3,
+      "theme": "flowers",
+      "par": 12,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "safari-04",
+      "index": 4,
+      "theme": "safari",
+      "par": 17,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "office-05",
+      "index": 5,
+      "theme": "office",
+      "par": 15,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "sweets-06",
+      "index": 6,
+      "theme": "sweets",
+      "par": 17,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "aquatic-07",
+      "index": 7,
+      "theme": "aquatic",
+      "par": 13,
+      "blind": false,
+      "orientation": "horizontal"
+    },
+    {
+      "id": "farm-08",
+      "index": 8,
+      "theme": "farm",
+      "par": 16,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "flowers-09",
+      "index": 9,
+      "theme": "flowers",
+      "par": 17,
+      "blind": false,
+      "orientation": "horizontal"
+    },
+    {
+      "id": "safari-10",
+      "index": 10,
+      "theme": "safari",
+      "par": 17,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "office-11",
+      "index": 11,
+      "theme": "office",
+      "par": 20,
+      "blind": false,
+      "orientation": "horizontal"
+    },
+    {
+      "id": "sweets-12",
+      "index": 12,
+      "theme": "sweets",
+      "par": 10,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "aquatic-13",
+      "index": 13,
+      "theme": "aquatic",
+      "par": 15,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "farm-14",
+      "index": 14,
+      "theme": "farm",
+      "par": 18,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "flowers-15",
+      "index": 15,
+      "theme": "flowers",
+      "par": 14,
+      "blind": false,
+      "orientation": "horizontal"
+    },
+    {
+      "id": "safari-16",
+      "index": 16,
+      "theme": "safari",
+      "par": 16,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "office-17",
+      "index": 17,
+      "theme": "office",
+      "par": 22,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "sweets-18",
+      "index": 18,
+      "theme": "sweets",
+      "par": 18,
+      "blind": false,
+      "orientation": "horizontal"
+    },
+    {
+      "id": "aquatic-19",
+      "index": 19,
+      "theme": "aquatic",
+      "par": 15,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "farm-20",
+      "index": 20,
+      "theme": "farm",
+      "par": 17,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "flowers-21",
+      "index": 21,
+      "theme": "flowers",
+      "par": 20,
+      "blind": false,
+      "orientation": "horizontal"
+    },
+    {
+      "id": "safari-22",
+      "index": 22,
+      "theme": "safari",
+      "par": 21,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "office-23",
+      "index": 23,
+      "theme": "office",
+      "par": 19,
+      "blind": false,
+      "orientation": "vertical"
+    },
+    {
+      "id": "sweets-24",
+      "index": 24,
+      "theme": "sweets",
+      "par": 20,
+      "blind": false,
+      "orientation": "horizontal"
+    },
+    {
+      "id": "aquatic-25",
+      "index": 25,
+      "theme": "aquatic",
+      "par": 16,
+      "blind": true,
+      "orientation": "vertical"
+    },
+    {
+      "id": "farm-26",
+      "index": 26,
+      "theme": "farm",
+      "par": 18,
+      "blind": true,
+      "orientation": "vertical"
+    },
+    {
+      "id": "flowers-27",
+      "index": 27,
+      "theme": "flowers",
+      "par": 18,
+      "blind": true,
+      "orientation": "horizontal"
+    },
+    {
+      "id": "safari-28",
+      "index": 28,
+      "theme": "safari",
+      "par": 20,
+      "blind": true,
+      "orientation": "vertical"
+    },
+    {
+      "id": "office-29",
+      "index": 29,
+      "theme": "office",
+      "par": 21,
+      "blind": true,
+      "orientation": "horizontal"
+    },
+    {
+      "id": "sweets-30",
+      "index": 30,
+      "theme": "sweets",
+      "par": 18,
+      "blind": true,
+      "orientation": "vertical"
+    },
+    {
+      "id": "aquatic-31",
+      "index": 31,
+      "theme": "aquatic",
+      "par": 21,
+      "blind": true,
+      "orientation": "vertical"
+    },
+    {
+      "id": "farm-32",
+      "index": 32,
+      "theme": "farm",
+      "par": 21,
+      "blind": true,
+      "orientation": "horizontal"
+    },
+    {
+      "id": "flowers-33",
+      "index": 33,
+      "theme": "flowers",
+      "par": 24,
+      "blind": true,
+      "orientation": "vertical"
+    },
+    {
+      "id": "safari-34",
+      "index": 34,
+      "theme": "safari",
+      "par": 21,
+      "blind": true,
+      "orientation": "horizontal"
+    },
+    {
+      "id": "office-35",
+      "index": 35,
+      "theme": "office",
+      "par": 21,
+      "blind": true,
+      "orientation": "vertical"
+    },
+    {
+      "id": "sweets-36",
+      "index": 36,
+      "theme": "sweets",
+      "par": 18,
+      "blind": true,
+      "orientation": "vertical"
+    }
+  ]
+}

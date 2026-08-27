@@ -1,0 +1,64 @@
+{
+  "id": "aquatic-13",
+  "index": 13,
+  "theme": "aquatic",
+  "orientation": "vertical",
+  "capacity": 4,
+  "blind": false,
+  "rowBreaks": [
+    5
+  ],
+  "containers": [
+    {
+      "stack": [
+        "🐠",
+        "🐙",
+        "🐬",
+        "🦀"
+      ]
+    },
+    {
+      "stack": [
+        "🐠",
+        "🐬",
+        "🐠",
+        "🐡"
+      ]
+    },
+    {
+      "stack": [
+        "🐡",
+        "🐡",
+        "🐡",
+        "🐙"
+      ],
+      "lock": {
+        "type": "sort",
+        "requires": "🐬"
+      }
+    },
+    {
+      "stack": [
+        "🦀",
+        "🦀",
+        "🐬",
+        "🐙"
+      ]
+    },
+    {
+      "stack": [
+        "🦀",
+        "🐬",
+        "🐠",
+        "🐙"
+      ]
+    },
+    {
+      "stack": []
+    },
+    {
+      "stack": []
+    }
+  ],
+  "par": 15
+}

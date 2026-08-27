@@ -1,0 +1,60 @@
+{
+  "id": "office-05",
+  "index": 5,
+  "theme": "office",
+  "orientation": "vertical",
+  "capacity": 4,
+  "blind": false,
+  "rowBreaks": [
+    5
+  ],
+  "containers": [
+    {
+      "stack": [
+        "📌",
+        "🖊️",
+        "✏️",
+        "📎"
+      ]
+    },
+    {
+      "stack": [
+        "📏",
+        "✏️",
+        "📏",
+        "🖊️"
+      ]
+    },
+    {
+      "stack": [
+        "✏️",
+        "📌",
+        "📏",
+        "🖊️"
+      ]
+    },
+    {
+      "stack": [
+        "📎",
+        "📎",
+        "✏️",
+        "📎"
+      ]
+    },
+    {
+      "stack": [
+        "🖊️",
+        "📏",
+        "📌",
+        "📌"
+      ]
+    },
+    {
+      "stack": []
+    },
+    {
+      "stack": []
+    }
+  ],
+  "par": 15
+}

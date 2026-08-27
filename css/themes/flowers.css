@@ -1,0 +1,20 @@
+#screen-game[data-theme='flowers'] .board {
+  --board-bg: linear-gradient(180deg, #eafbe0, #b8e6a0);
+  background: var(--board-bg);
+}
+#screen-game[data-theme='flowers'] .container {
+  background: linear-gradient(180deg, #fff6fb, #fbe4f1);
+  border-color: #c76aa0;
+  border-radius: 40% 40% 16px 16px / 20% 20% 16px 16px;
+}
+#screen-game[data-theme='flowers'] .container.horizontal {
+  border-radius: 16px 40% 40% 16px / 16px 50% 50% 16px;
+}
+#screen-game[data-theme='flowers'] .lock-cover {
+  --lock-cover-bg: repeating-linear-gradient(115deg, #3f8a3a, #3f8a3a 8px, #2c6b28 8px, #2c6b28 16px);
+  border: 3px solid #1f4a1c;
+}
+#screen-game[data-theme='flowers'] .lock-barrier {
+  --lock-barrier-bg: repeating-linear-gradient(70deg, rgba(63, 138, 58, 0.55) 0 5px, rgba(120, 190, 100, 0.3) 5px 13px);
+  border: 2px solid #3f8a3a;
+}

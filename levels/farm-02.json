@@ -1,0 +1,52 @@
+{
+  "id": "farm-02",
+  "index": 2,
+  "theme": "farm",
+  "orientation": "vertical",
+  "capacity": 4,
+  "blind": false,
+  "rowBreaks": [
+    5
+  ],
+  "containers": [
+    {
+      "stack": [
+        "🐄",
+        "🐄",
+        "🐑",
+        "🐔"
+      ]
+    },
+    {
+      "stack": [
+        "🐖",
+        "🐑",
+        "🐔",
+        "🐖"
+      ]
+    },
+    {
+      "stack": [
+        "🐔",
+        "🐑",
+        "🐔",
+        "🐖"
+      ]
+    },
+    {
+      "stack": [
+        "🐖",
+        "🐑",
+        "🐄",
+        "🐄"
+      ]
+    },
+    {
+      "stack": []
+    },
+    {
+      "stack": []
+    }
+  ],
+  "par": 12
+}
