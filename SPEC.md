@@ -282,6 +282,29 @@ vertical suits tanks/vases. Roughly 1 in 4 levels should be horizontal.
   practice **it must be empty at win**. The UI should hint this if the player parks
   emojis there near the end ("the extra container must be emptied to finish").
 
+### 6.3 Dead-end detection ("no moves left")
+
+The game must **never leave the player silently stuck** — discovering a dead end by
+tapping around is miserable.
+
+- After every state change (move, undo, unlock, rescue add), the engine checks
+  whether **any legal move exists** (§2.2, honoring locks). This is a cheap O(N²)
+  scan over container tops — run it synchronously, no solver needed.
+- If no legal move exists, show a **"No moves left! 🙈"** banner (non-blocking, over
+  the board) offering exactly the player's real options: **Undo**, **Restart**, and
+  **Add rescue container** (only if unused this attempt — and only if adding it
+  actually creates a legal move, which it does whenever any container is non-empty).
+  The banner dismisses automatically the moment a legal move exists again.
+- Honest limitation, stated so the implementer doesn't over-promise in UI copy:
+  "a legal move exists" does not mean "the level is still winnable." Positions where
+  legal-but-futile shuffling remains are **not** detected in v1 — true
+  unwinnable-position detection requires running the solver on the current state,
+  which is deliberately out of v1's runtime (§9). The banner copy must therefore say
+  "no moves left", never "unsolvable".
+- **v2 hook:** once the solver runs in a Web Worker for endless mode (§12), the same
+  worker can power an optional "this position can't be won anymore 💀 — undo or
+  restart?" warning. The engine/UI separation should make that a drop-in addition.
+
 ## 7. Blind levels
 
 - A level flagged `blind: true` hides every emoji **below the top of each stack**
@@ -504,6 +527,7 @@ go. Instead:
 - [ ] Blind reveal semantics per §7 incl. undo not re-hiding (unit tests).
 - [ ] Unlimited undo to initial deal; restart resets reveals/locks/rescue.
 - [ ] Rescue container: capacity 2, once per attempt, marks assisted, excluded from adjacency.
+- [ ] Dead-end detection per §6.3: "No moves left" banner appears whenever no legal move exists, offers undo/restart/rescue, and clears itself (unit tests on the has-any-legal-move check).
 - [ ] Results screen shows par comparison and replay; best results persist and render on level select.
 - [ ] Horizontal and vertical layouts both shippable; adjacency stable across screen sizes.
 - [ ] Six themes with distinct container skins and themed lock art — opaque type A covers (fully concealing, with required-emoji badge) and see-through type B barriers — each with unlock/reveal animations.
