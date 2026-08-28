@@ -2,10 +2,13 @@
   "id": "safari-34",
   "index": 34,
   "theme": "safari",
-  "orientation": "horizontal",
+  "orientation": "vertical",
   "capacity": 4,
   "blind": true,
-  "rowBreaks": [],
+  "rowBreaks": [
+    5,
+    10
+  ],
   "containers": [
     {
       "stack": [

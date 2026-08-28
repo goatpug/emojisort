@@ -2,10 +2,12 @@
   "id": "farm-32",
   "index": 32,
   "theme": "farm",
-  "orientation": "horizontal",
+  "orientation": "vertical",
   "capacity": 4,
   "blind": true,
-  "rowBreaks": [],
+  "rowBreaks": [
+    5
+  ],
   "containers": [
     {
       "stack": [

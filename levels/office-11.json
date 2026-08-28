@@ -2,10 +2,12 @@
   "id": "office-11",
   "index": 11,
   "theme": "office",
-  "orientation": "horizontal",
+  "orientation": "vertical",
   "capacity": 4,
   "blind": false,
-  "rowBreaks": [],
+  "rowBreaks": [
+    5
+  ],
   "containers": [
     {
       "stack": [

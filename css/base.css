@@ -256,20 +256,6 @@ button:focus-visible,
   line-height: 1;
   user-select: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.2em;
-  height: 1.2em;
-  border-radius: 50%;
-  /* Soft backdrop plate so the emoji reads clearly against busy/patterned
-     container backgrounds (e.g. farm wood-grain behind a pale pig). */
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.62) 62%, transparent 66%);
-}
-@media (prefers-color-scheme: dark) {
-  .token {
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 62%, transparent 66%);
-  }
 }
 .token.incoming {
   opacity: 0;

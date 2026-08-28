@@ -2,10 +2,12 @@
   "id": "flowers-15",
   "index": 15,
   "theme": "flowers",
-  "orientation": "horizontal",
+  "orientation": "vertical",
   "capacity": 4,
   "blind": false,
-  "rowBreaks": [],
+  "rowBreaks": [
+    5
+  ],
   "containers": [
     {
       "stack": [

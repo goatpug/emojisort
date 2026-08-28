@@ -54,7 +54,7 @@
       "theme": "aquatic",
       "par": 13,
       "blind": false,
-      "orientation": "horizontal"
+      "orientation": "vertical"
     },
     {
       "id": "farm-08",
@@ -70,7 +70,7 @@
       "theme": "flowers",
       "par": 17,
       "blind": false,
-      "orientation": "horizontal"
+      "orientation": "vertical"
     },
     {
       "id": "safari-10",
@@ -86,7 +86,7 @@
       "theme": "office",
       "par": 20,
       "blind": false,
-      "orientation": "horizontal"
+      "orientation": "vertical"
     },
     {
       "id": "sweets-12",
@@ -118,7 +118,7 @@
       "theme": "flowers",
       "par": 14,
       "blind": false,
-      "orientation": "horizontal"
+      "orientation": "vertical"
     },
     {
       "id": "safari-16",
@@ -142,7 +142,7 @@
       "theme": "sweets",
       "par": 23,
       "blind": false,
-      "orientation": "horizontal"
+      "orientation": "vertical"
     },
     {
       "id": "aquatic-19",
@@ -166,7 +166,7 @@
       "theme": "flowers",
       "par": 19,
       "blind": false,
-      "orientation": "horizontal"
+      "orientation": "vertical"
     },
     {
       "id": "safari-22",
@@ -190,7 +190,7 @@
       "theme": "sweets",
       "par": 19,
       "blind": false,
-      "orientation": "horizontal"
+      "orientation": "vertical"
     },
     {
       "id": "aquatic-25",
@@ -214,7 +214,7 @@
       "theme": "flowers",
       "par": 18,
       "blind": true,
-      "orientation": "horizontal"
+      "orientation": "vertical"
     },
     {
       "id": "safari-28",
@@ -230,7 +230,7 @@
       "theme": "office",
       "par": 21,
       "blind": true,
-      "orientation": "horizontal"
+      "orientation": "vertical"
     },
     {
       "id": "sweets-30",
@@ -254,7 +254,7 @@
       "theme": "farm",
       "par": 21,
       "blind": true,
-      "orientation": "horizontal"
+      "orientation": "vertical"
     },
     {
       "id": "flowers-33",
@@ -270,7 +270,7 @@
       "theme": "safari",
       "par": 27,
       "blind": true,
-      "orientation": "horizontal"
+      "orientation": "vertical"
     },
     {
       "id": "office-35",

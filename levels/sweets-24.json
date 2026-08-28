@@ -2,10 +2,12 @@
   "id": "sweets-24",
   "index": 24,
   "theme": "sweets",
-  "orientation": "horizontal",
+  "orientation": "vertical",
   "capacity": 4,
   "blind": false,
-  "rowBreaks": [],
+  "rowBreaks": [
+    5
+  ],
   "containers": [
     {
       "stack": [

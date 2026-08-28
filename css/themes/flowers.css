@@ -3,26 +3,11 @@
   background: var(--board-bg);
 }
 #screen-game[data-theme='flowers'] .container {
-  background: linear-gradient(180deg, #fff6fb, #fbe4f1);
-  border-color: #c76aa0;
-  border-radius: 40% 40% 16px 16px / 20% 20% 16px 16px;
-}
-/* A raised, lighter rim right at the opening (top for vertical, right for
-   horizontal — the rounded "mouth" edge) reads more clearly as a vase lip
-   than the rounded silhouette alone. */
-/* Deliberately no box-shadow override here (even though a shaded rim would
-   read a bit more 3-D) — box-shadow is how .selected/.complete draw their
-   state rings, and an ID-scoped theme rule would beat those by specificity
-   and silently swallow them. The thicker border alone still reads as a
-   lip. */
-#screen-game[data-theme='flowers'] .container.vertical {
-  border-top-width: 5px;
-  border-top-color: #f4c3dd;
-}
-#screen-game[data-theme='flowers'] .container.horizontal {
-  border-radius: 16px 40% 40% 16px / 16px 50% 50% 16px;
-  border-right-width: 5px;
-  border-right-color: #f4c3dd;
+  /* A plain rectangular soil bed, not a vase — the rounded "mouth" reading
+     was confusing, and a rectangle matches every other theme's container. */
+  background: linear-gradient(180deg, #f3e8d6, #e5d1a8);
+  border-color: #a9835a;
+  border-radius: 10px;
 }
 #screen-game[data-theme='flowers'] .lock-cover {
   --lock-cover-bg: repeating-linear-gradient(115deg, #3f8a3a, #3f8a3a 8px, #2c6b28 8px, #2c6b28 16px);

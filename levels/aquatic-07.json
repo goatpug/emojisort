@@ -2,10 +2,12 @@
   "id": "aquatic-07",
   "index": 7,
   "theme": "aquatic",
-  "orientation": "horizontal",
+  "orientation": "vertical",
   "capacity": 4,
   "blind": false,
-  "rowBreaks": [],
+  "rowBreaks": [
+    5
+  ],
   "containers": [
     {
       "stack": [

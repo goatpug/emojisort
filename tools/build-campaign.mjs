@@ -12,8 +12,13 @@ const THEME_ORDER = ['aquatic', 'farm', 'flowers', 'safari', 'office', 'sweets']
 
 // One entry per level (1-indexed). Theme rotates through THEME_ORDER so
 // every theme lands exactly 6 times across the campaign.
+// All-vertical (§ post-launch revision): a stack of ~10 horizontal tubes
+// turned out to be a lot of up/down scanning to play, so the campaign no
+// longer uses orientation: 'horizontal' at all — every entry is vertical.
+// The engine and renderer still fully support horizontal (see core.js /
+// render.js), it's just unused here now.
 const PLAN = [
-  // 1-6: basics, K grows 3->6, 2 empties, vertical, no mechanics.
+  // 1-6: basics, K grows 3->6, 2 empties, no mechanics.
   { k: 3, empties: 2, orientation: 'vertical' },
   { k: 4, empties: 2, orientation: 'vertical' },
   { k: 4, empties: 2, orientation: 'vertical' },
@@ -21,43 +26,43 @@ const PLAN = [
   { k: 5, empties: 2, orientation: 'vertical' },
   { k: 6, empties: 2, orientation: 'vertical' },
 
-  // 7-12: first horizontal levels, K 5-7, one with only 1 empty.
-  { k: 5, empties: 2, orientation: 'horizontal' },
+  // 7-12: K 5-7, one with only 1 empty.
+  { k: 5, empties: 2, orientation: 'vertical' },
   { k: 6, empties: 2, orientation: 'vertical' },
-  { k: 6, empties: 2, orientation: 'horizontal' },
+  { k: 6, empties: 2, orientation: 'vertical' },
   { k: 7, empties: 2, orientation: 'vertical' },
-  { k: 7, empties: 2, orientation: 'horizontal' },
+  { k: 7, empties: 2, orientation: 'vertical' },
   { k: 6, empties: 1, orientation: 'vertical' },
 
   // 13-18: type A (sort) locks, 13 = gentle teach.
   { k: 5, empties: 2, orientation: 'vertical', locks: { sort: 1 } },
   { k: 6, empties: 2, orientation: 'vertical', locks: { sort: 1 } },
-  { k: 6, empties: 2, orientation: 'horizontal', locks: { sort: 1 } },
+  { k: 6, empties: 2, orientation: 'vertical', locks: { sort: 1 } },
   { k: 7, empties: 2, orientation: 'vertical', locks: { sort: 1 } },
   { k: 7, empties: 2, orientation: 'vertical', locks: { sort: 2 } },
-  { k: 7, empties: 2, orientation: 'horizontal', locks: { sort: 2 } },
+  { k: 7, empties: 2, orientation: 'vertical', locks: { sort: 2 } },
 
   // 19-24: type B (neighbor) locks, 19 = teach; A+B mixes late in the band.
   { k: 5, empties: 2, orientation: 'vertical', locks: { neighbor: 1 } },
   { k: 6, empties: 2, orientation: 'vertical', locks: { neighbor: 1 } },
-  { k: 6, empties: 2, orientation: 'horizontal', locks: { neighbor: 1 } },
+  { k: 6, empties: 2, orientation: 'vertical', locks: { neighbor: 1 } },
   { k: 7, empties: 2, orientation: 'vertical', locks: { neighbor: 1 } },
   { k: 7, empties: 2, orientation: 'vertical', locks: { sort: 1, neighbor: 1 } },
-  { k: 7, empties: 2, orientation: 'horizontal', locks: { sort: 1, neighbor: 1 } },
+  { k: 7, empties: 2, orientation: 'vertical', locks: { sort: 1, neighbor: 1 } },
 
-  // 25-30: blind levels, 25 = teach (no locks); blind + horizontal.
+  // 25-30: blind levels, 25 = teach (no locks).
   { k: 5, empties: 2, orientation: 'vertical', blind: true },
   { k: 6, empties: 2, orientation: 'vertical', blind: true },
-  { k: 6, empties: 2, orientation: 'horizontal', blind: true },
+  { k: 6, empties: 2, orientation: 'vertical', blind: true },
   { k: 7, empties: 2, orientation: 'vertical', blind: true },
-  { k: 7, empties: 2, orientation: 'horizontal', blind: true },
+  { k: 7, empties: 2, orientation: 'vertical', blind: true },
   { k: 7, empties: 2, orientation: 'vertical', blind: true },
 
   // 31-36: everything combined, K up to 9-10, blind + locks, 1 empty on 35-36.
   { k: 8, empties: 2, orientation: 'vertical', blind: true, locks: { sort: 1 } },
-  { k: 8, empties: 2, orientation: 'horizontal', blind: true, locks: { neighbor: 1 } },
+  { k: 8, empties: 2, orientation: 'vertical', blind: true, locks: { neighbor: 1 } },
   { k: 9, empties: 2, orientation: 'vertical', blind: true, locks: { sort: 1, neighbor: 1 } },
-  { k: 9, empties: 2, orientation: 'horizontal', blind: true, locks: { sort: 2 } },
+  { k: 9, empties: 2, orientation: 'vertical', blind: true, locks: { sort: 2 } },
   { k: 9, empties: 1, orientation: 'vertical', blind: true, locks: { neighbor: 1 } },
   { k: 10, empties: 1, orientation: 'vertical', blind: true, locks: { sort: 1 } },
 ];

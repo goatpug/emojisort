@@ -3,8 +3,10 @@
   background: var(--board-bg);
 }
 #screen-game[data-theme='farm'] .container {
-  background: repeating-linear-gradient(90deg, #e8c896, #e8c896 10px, #dcb87f 10px, #dcb87f 12px);
-  border-color: #7a4c22;
+  /* Same wood-grain stripe, just much lighter, so pale animals (the pig!)
+     don't wash out against it. */
+  background: repeating-linear-gradient(90deg, #faf1de, #faf1de 10px, #f0e0ba 10px, #f0e0ba 12px);
+  border-color: #a9793f;
   border-radius: 6px;
 }
 #screen-game[data-theme='farm'] .lock-cover {

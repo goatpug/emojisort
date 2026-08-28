@@ -3,12 +3,10 @@
   background: var(--board-bg);
 }
 #screen-game[data-theme='aquatic'] .container {
+  /* A plain rectangular aquarium, not a rounded-bottom tank. */
   background: linear-gradient(180deg, #eafcff, #cdeff8);
   border-color: #1c7fa8;
-  border-radius: 10px 10px 26px 26px;
-}
-#screen-game[data-theme='aquatic'] .container.horizontal {
-  border-radius: 10px 26px 26px 10px;
+  border-radius: 10px;
 }
 #screen-game[data-theme='aquatic'] .lock-cover {
   --lock-cover-bg: radial-gradient(circle at 50% 30%, #ffe9b8, #d99a3f 70%, #8a5a1f);

@@ -3,12 +3,14 @@
   background: var(--board-bg);
 }
 #screen-game[data-theme='safari'] .container {
-  background: repeating-linear-gradient(0deg, #d9a86a, #d9a86a 12px, #c6924f 12px, #c6924f 14px);
-  border-color: #6b4420;
+  /* Same crate-slat stripe, just much lighter, so darker animals (and the
+     zebra's own stripes) don't blend into it. */
+  background: repeating-linear-gradient(0deg, #f7e7c8, #f7e7c8 12px, #eeddb3 12px, #eeddb3 14px);
+  border-color: #8a5f35;
   border-radius: 4px;
 }
 #screen-game[data-theme='safari'] .container.horizontal {
-  background: repeating-linear-gradient(90deg, #d9a86a, #d9a86a 12px, #c6924f 12px, #c6924f 14px);
+  background: repeating-linear-gradient(90deg, #f7e7c8, #f7e7c8 12px, #eeddb3 12px, #eeddb3 14px);
 }
 #screen-game[data-theme='safari'] .lock-cover {
   --lock-cover-bg: repeating-linear-gradient(45deg, #b0a184, #b0a184 10px, #8f8168 10px, #8f8168 20px);
