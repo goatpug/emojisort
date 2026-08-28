@@ -36,11 +36,15 @@ const els = {
   btnUndo: document.getElementById('btn-undo'),
   btnRestart: document.getElementById('btn-restart'),
   btnRescue: document.getElementById('btn-rescue'),
+  btnCheckSolvable: document.getElementById('btn-check-solvable'),
   btnTrophy: document.getElementById('btn-trophy'),
   deadendBanner: document.getElementById('deadend-banner'),
+  deadendText: document.getElementById('deadend-text'),
   deadendUndo: document.getElementById('deadend-undo'),
   deadendRestart: document.getElementById('deadend-restart'),
   deadendRescue: document.getElementById('deadend-rescue'),
+  checkToast: document.getElementById('check-toast'),
+  checkToastText: document.getElementById('check-toast-text'),
   tooltipBanner: document.getElementById('tooltip-banner'),
   tooltipText: document.getElementById('tooltip-text'),
   tooltipDismiss: document.getElementById('tooltip-dismiss'),
@@ -62,7 +66,7 @@ let session = null;
 let selection = null;
 let invalidTimer = null;
 let cancelDeepDeadEndCheck = null;
-let lastDeepCheckedState = null;
+let checkToastTimer = null;
 
 async function init() {
   manifest = await fetch('levels/index.json').then((r) => r.json());
@@ -74,6 +78,7 @@ async function init() {
   els.btnUndo.addEventListener('click', doUndo);
   els.btnRestart.addEventListener('click', doRestart);
   els.btnRescue.addEventListener('click', doRescue);
+  els.btnCheckSolvable.addEventListener('click', doCheckSolvable);
   els.deadendUndo.addEventListener('click', doUndo);
   els.deadendRestart.addEventListener('click', doRestart);
   els.deadendRescue.addEventListener('click', doRescue);
@@ -143,7 +148,8 @@ function loadLevel(lvl) {
   session = createSession(level);
   cancelDeepDeadEndCheck?.();
   cancelDeepDeadEndCheck = null;
-  lastDeepCheckedState = null;
+  clearTimeout(checkToastTimer);
+  hideOverlay(els.checkToast);
   selection = createSelectionController({
     canSelect: (index) => {
       const v = view()[index];
@@ -178,11 +184,13 @@ function renderAll(openingIndices = new Set()) {
   els.moveCount.textContent = `${session.moveCount} move${session.moveCount === 1 ? '' : 's'}`;
   els.btnUndo.disabled = session.history.length <= 1;
   els.btnRescue.disabled = !canAddRescue(session);
+  els.btnCheckSolvable.disabled = checkWin(session) || checkDeadEnd(session);
   updateDeadEndBanner();
 }
 
 function attemptMove(from, to) {
   if (!canPour(session.state, from, to)) return false;
+  invalidatePendingCheck();
 
   const beforeView = view();
   const boardRects = [...els.board.querySelectorAll('.container')].map((el) => el.getBoundingClientRect());
@@ -226,51 +234,63 @@ function flashInvalid(index) {
   invalidTimer = setTimeout(() => renderAll(), 350);
 }
 
+// Only the cheap, instant, always-correct "is there any legal move at all"
+// check runs automatically. The deeper "can this position still be WON"
+// check (which can say no even while legal moves exist — see
+// doCheckSolvable) is opt-in only, via the Check button: it's too easy for
+// an unprompted verdict to land mid-tap and be mistaken for (or literally
+// overlap and block) the move it's actually fine to make.
 function updateDeadEndBanner() {
-  const won = checkWin(session);
-  const stuck = !won && checkDeadEnd(session);
+  const stuck = !checkWin(session) && checkDeadEnd(session);
   els.deadendBanner.hidden = !stuck;
+  els.deadendText.textContent = 'No moves left! 🙈';
   if (stuck) {
-    cancelDeepDeadEndCheck?.();
-    cancelDeepDeadEndCheck = null;
     els.deadendRescue.hidden = !canAddRescue(session) || !rescueWouldHelp(session);
-    return;
   }
-  if (won) {
-    cancelDeepDeadEndCheck?.();
-    cancelDeepDeadEndCheck = null;
-    return;
-  }
+}
 
-  // The cheap check found a legal move, but that's not proof the board can
-  // still be won — e.g. the only moves left might shuffle one color back
-  // and forth between two containers forever while the rest of it is
-  // buried elsewhere. Ask the solver in the background. A no-op re-render
-  // (e.g. merely tapping a container to select it) re-enters this function
-  // on the exact same session.state — skip re-asking the solver in that
-  // case rather than cancelling and restarting an identical background
-  // search on every tap.
-  if (session.state === lastDeepCheckedState) return;
-  lastDeepCheckedState = session.state;
-
+function invalidatePendingCheck() {
   cancelDeepDeadEndCheck?.();
+  cancelDeepDeadEndCheck = null;
+  clearTimeout(checkToastTimer);
+  hideOverlay(els.checkToast);
+}
+
+function doCheckSolvable() {
+  if (checkWin(session) || checkDeadEnd(session)) return; // nothing to check
+  invalidatePendingCheck();
+
+  els.btnCheckSolvable.disabled = true;
+  els.checkToastText.textContent = 'Checking…';
+  showOverlay(els.checkToast);
+
   const askedAbout = session.state;
   cancelDeepDeadEndCheck = checkSolvableInBackground(askedAbout, session.adjacency, (solvable) => {
+    cancelDeepDeadEndCheck = null;
     if (session.state !== askedAbout) return; // superseded by a later move
-    els.deadendBanner.hidden = solvable;
-    if (!solvable) {
+    els.btnCheckSolvable.disabled = false;
+    if (solvable) {
+      els.checkToastText.textContent = 'Still winnable — keep going! 👍';
+      clearTimeout(checkToastTimer);
+      checkToastTimer = setTimeout(() => hideOverlay(els.checkToast), 2200);
+    } else {
+      hideOverlay(els.checkToast);
+      els.deadendText.textContent = "This position can't be won anymore 💀";
+      els.deadendBanner.hidden = false;
       els.deadendRescue.hidden = !canAddRescue(session) || !rescueWouldHelp(session);
     }
   });
 }
 
 function doUndo() {
+  invalidatePendingCheck();
   session = undo(session);
   selection.clear();
   renderAll();
 }
 
 function doRestart() {
+  invalidatePendingCheck();
   session = restart(level);
   selection.clear();
   renderAll();
@@ -278,6 +298,7 @@ function doRestart() {
 
 function doRescue() {
   if (!canAddRescue(session)) return;
+  invalidatePendingCheck();
   session = addRescue(session);
   selection.clear();
   renderAll();

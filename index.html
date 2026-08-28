@@ -42,15 +42,20 @@
         <button id="btn-undo" class="tool-button" aria-label="Undo last move">↩️ Undo</button>
         <button id="btn-restart" class="tool-button" aria-label="Restart level">🔄 Restart</button>
         <button id="btn-rescue" class="tool-button" aria-label="Add a rescue container">➕ Rescue</button>
+        <button id="btn-check-solvable" class="tool-button" aria-label="Check whether this position can still be won">🔍 Check</button>
       </footer>
 
       <div id="deadend-banner" class="banner" role="alert" hidden>
-        <p>No moves left! 🙈</p>
+        <p id="deadend-text">No moves left! 🙈</p>
         <div class="banner-actions">
           <button id="deadend-undo" class="tool-button">↩️ Undo</button>
           <button id="deadend-restart" class="tool-button">🔄 Restart</button>
           <button id="deadend-rescue" class="tool-button">➕ Add rescue container</button>
         </div>
+      </div>
+
+      <div id="check-toast" class="banner" role="status" hidden>
+        <p id="check-toast-text"></p>
       </div>
 
       <div id="tooltip-banner" class="banner tooltip-banner" hidden>
