@@ -10,16 +10,19 @@
 /* A raised, lighter rim right at the opening (top for vertical, right for
    horizontal — the rounded "mouth" edge) reads more clearly as a vase lip
    than the rounded silhouette alone. */
+/* Deliberately no box-shadow override here (even though a shaded rim would
+   read a bit more 3-D) — box-shadow is how .selected/.complete draw their
+   state rings, and an ID-scoped theme rule would beat those by specificity
+   and silently swallow them. The thicker border alone still reads as a
+   lip. */
 #screen-game[data-theme='flowers'] .container.vertical {
   border-top-width: 5px;
   border-top-color: #f4c3dd;
-  box-shadow: inset 0 6px 5px -4px rgba(150, 55, 100, 0.4), var(--shadow);
 }
 #screen-game[data-theme='flowers'] .container.horizontal {
   border-radius: 16px 40% 40% 16px / 16px 50% 50% 16px;
   border-right-width: 5px;
   border-right-color: #f4c3dd;
-  box-shadow: inset -6px 0 5px -4px rgba(150, 55, 100, 0.4), var(--shadow);
 }
 #screen-game[data-theme='flowers'] .lock-cover {
   --lock-cover-bg: repeating-linear-gradient(115deg, #3f8a3a, #3f8a3a 8px, #2c6b28 8px, #2c6b28 16px);

@@ -11,6 +11,7 @@ import {
   hasAnyLegalMove,
   isContainerComplete,
 } from '../js/engine/core.js';
+import { solve } from '../js/engine/solver.js';
 import {
   createSession,
   pour,
@@ -375,4 +376,30 @@ test('pourAndSettle unlocks in the same step a completing pour happens', () => {
   const { state: settled, unlocked } = pourAndSettle(state, 1, 0, adjacency);
   assert.equal(unlocked, true);
   assert.equal(settled.containers[2].lock.open, true);
+});
+
+test('solve() proves a position unsolvable even when a pointless same-color swap keeps hasAnyLegalMove true', () => {
+  // Two containers, one color, 6 instances total but capacity 5 — too many
+  // to ever gather into a single container, and there's nowhere else for
+  // the overflow to go. hasAnyLegalMove() still says "not stuck": pouring
+  // the 3/3 top runs back and forth is always legal (each pour maxes out
+  // the destination — 3+2 of 5 free — while the source keeps its leftover,
+  // so it settles into an endless (1,5)/(5,1) oscillation, never emptying
+  // either side). But no sequence of pours can ever satisfy "every
+  // container empty or complete" — 5 (complete) + 0 (empty) is the only
+  // empty-or-complete split of a single color across two capacity-5
+  // containers, and 5 + 0 = 5 ≠ 6.
+  const level = {
+    id: 'test-unsolvable',
+    theme: 'aquatic',
+    orientation: 'vertical',
+    capacity: 5,
+    blind: false,
+    rowBreaks: [],
+    containers: [{ stack: ['🦀', '🦀', '🦀'] }, { stack: ['🦀', '🦀', '🦀'] }],
+  };
+  const state = createState(level);
+  assert.equal(hasAnyLegalMove(state), true);
+  const result = solve(level);
+  assert.equal(result.solvable, false);
 });

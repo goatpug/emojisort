@@ -105,6 +105,12 @@ function renderContainer(view, index, level, themeMeta, opts) {
     }
   }
 
+  // The run of emoji that would actually be picked up by a pour (the top
+  // run) pops up out of the tube when selected — a preview of what's about
+  // to move, rather than shifting the whole container.
+  const isSelected = index === opts.selectedIndex;
+  const liftFrom = isSelected && c.topRun ? c.tokens.length - c.topRun.count : Infinity;
+
   // Slots always render at full capacity — even while locked — so the cover/
   // barrier overlay spans the container's true length instead of collapsing
   // it down to nothing (a locked container has no visible tokens, but it
@@ -115,7 +121,7 @@ function renderContainer(view, index, level, themeMeta, opts) {
     if (!c.locked && i < c.tokens.length) {
       const t = c.tokens[i];
       const span = document.createElement('span');
-      span.className = 'token' + (t.hidden ? ' hidden-token' : '');
+      span.className = 'token' + (t.hidden ? ' hidden-token' : '') + (i >= liftFrom ? ' lifted' : '');
       span.textContent = t.hidden ? '❓' : t.emoji;
       slot.appendChild(span);
     }

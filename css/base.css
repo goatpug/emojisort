@@ -280,10 +280,16 @@ button:focus-visible,
 }
 
 .container.selected {
-  transform: translateY(-10px);
+  box-shadow: 0 0 0 3px var(--accent), var(--shadow);
 }
-.container.horizontal.selected {
-  transform: translateX(10px) translateY(0);
+/* The picked-up run (what pouring would actually move) pops out of the
+   tube toward its opening — a preview of the pending move, not just a
+   static "this one's selected" marker. */
+.token.lifted {
+  transform: translateY(-28%);
+}
+.container.horizontal .token.lifted {
+  transform: translateX(28%);
 }
 .container.invalid-target {
   animation: shake 0.32s ease;

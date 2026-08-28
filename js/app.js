@@ -22,6 +22,7 @@ import {
 import { canPour } from './engine/core.js';
 import { renderBoard, renderLevelGrid, floatTokens } from './ui/render.js';
 import { createSelectionController } from './ui/input.js';
+import { checkSolvableInBackground } from './ui/deadend-checker.js';
 
 const els = {
   select: document.getElementById('screen-select'),
@@ -60,6 +61,8 @@ let level = null;
 let session = null;
 let selection = null;
 let invalidTimer = null;
+let cancelDeepDeadEndCheck = null;
+let lastDeepCheckedState = null;
 
 async function init() {
   manifest = await fetch('levels/index.json').then((r) => r.json());
@@ -138,6 +141,9 @@ async function fetchAndLoad(entry) {
 function loadLevel(lvl) {
   level = lvl;
   session = createSession(level);
+  cancelDeepDeadEndCheck?.();
+  cancelDeepDeadEndCheck = null;
+  lastDeepCheckedState = null;
   selection = createSelectionController({
     canSelect: (index) => {
       const v = view()[index];
@@ -145,6 +151,7 @@ function loadLevel(lvl) {
     },
     onAttemptMove: (from, to) => attemptMove(from, to),
     onInvalid: (index) => flashInvalid(index),
+    onSelectionChange: () => renderAll(),
   });
 
   els.select.hidden = true;
@@ -220,11 +227,41 @@ function flashInvalid(index) {
 }
 
 function updateDeadEndBanner() {
-  const stuck = !checkWin(session) && checkDeadEnd(session);
+  const won = checkWin(session);
+  const stuck = !won && checkDeadEnd(session);
   els.deadendBanner.hidden = !stuck;
   if (stuck) {
+    cancelDeepDeadEndCheck?.();
+    cancelDeepDeadEndCheck = null;
     els.deadendRescue.hidden = !canAddRescue(session) || !rescueWouldHelp(session);
+    return;
   }
+  if (won) {
+    cancelDeepDeadEndCheck?.();
+    cancelDeepDeadEndCheck = null;
+    return;
+  }
+
+  // The cheap check found a legal move, but that's not proof the board can
+  // still be won — e.g. the only moves left might shuffle one color back
+  // and forth between two containers forever while the rest of it is
+  // buried elsewhere. Ask the solver in the background. A no-op re-render
+  // (e.g. merely tapping a container to select it) re-enters this function
+  // on the exact same session.state — skip re-asking the solver in that
+  // case rather than cancelling and restarting an identical background
+  // search on every tap.
+  if (session.state === lastDeepCheckedState) return;
+  lastDeepCheckedState = session.state;
+
+  cancelDeepDeadEndCheck?.();
+  const askedAbout = session.state;
+  cancelDeepDeadEndCheck = checkSolvableInBackground(askedAbout, session.adjacency, (solvable) => {
+    if (session.state !== askedAbout) return; // superseded by a later move
+    els.deadendBanner.hidden = solvable;
+    if (!solvable) {
+      els.deadendRescue.hidden = !canAddRescue(session) || !rescueWouldHelp(session);
+    }
+  });
 }
 
 function doUndo() {
