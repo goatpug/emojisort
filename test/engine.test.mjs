@@ -114,7 +114,12 @@ test('type A (sort) lock opens only once its required type is fully sorted', () 
   const adjacency = computeAdjacency(state.containers, state.rowBreaks);
   assert.equal(state.containers[3].lock.open, false);
 
-  // Manually sort all 🐠 into container 2 to simulate completion.
+  // Manually simulate the end state of sorting all 4 🐠 into container 2 —
+  // conserving instance counts, as any real sequence of pours would (the
+  // 2 🐙 left behind in each of containers 0/1 are exactly the ones that
+  // were never touched).
+  state.containers[0].stack = ['🐙', '🐙'];
+  state.containers[1].stack = ['🐙', '🐙'];
   state.containers[2].stack = ['🐠', '🐠', '🐠', '🐠'];
   const { state: settled } = evaluateUnlocks(state, adjacency);
   assert.equal(settled.containers[3].lock.open, true);
@@ -402,4 +407,27 @@ test('solve() proves a position unsolvable even when a pointless same-color swap
   assert.equal(hasAnyLegalMove(state), true);
   const result = solve(level);
   assert.equal(result.solvable, false);
+});
+
+test('a sort lock does not open just because the rescue tube (capacity 2) fills up with only part of the required type', () => {
+  const level = basicLevel({
+    containers: [
+      { stack: ['🐙', '🐙'] },
+      { stack: ['🐙', '🐙'] },
+      { stack: [] },
+      { stack: ['🐡', '🐡', '🐡', '🐡'], lock: { type: 'sort', requires: '🐙' } },
+    ],
+  });
+  let session = createSession(level);
+  session = addRescue(session); // container index 4, capacity 2
+
+  session = pour(session, 0, 4); // both 🐙 from container 0 fill the rescue tube (2/2 — "complete" at ITS capacity, but only half of the 4 total 🐙 on the board)
+  assert.equal(session.state.containers[4].stack.length, 2);
+  assert.equal(session.state.containers[3].lock.open, false, 'lock must stay closed: only 2 of the 4 🐙 are gathered, not all of them');
+
+  // Fixing the mistake — move the rescue tube's 🐙 into container 1 (now
+  // holding all 4 for real) — must correctly open the lock afterward.
+  session = pour(session, 4, 1);
+  assert.equal(session.state.containers[1].stack.length, 4);
+  assert.equal(session.state.containers[3].lock.open, true, 'lock must open once all 4 🐙 are genuinely gathered in one container');
 });

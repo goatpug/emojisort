@@ -144,9 +144,28 @@ export function computeAdjacency(containers, rowBreaks) {
  */
 export function evaluateUnlocks(state, adjacency) {
   const next = cloneState(state);
+
+  // A sort lock's "fully sorted" condition means every instance of that
+  // emoji on the whole board sits in one container — not merely that some
+  // container is full at its OWN capacity. Those coincide for every normal
+  // container (capacity always equals that type's total instance count by
+  // level design), but not for the rescue container, whose capacity (2) is
+  // independent of it — so 2 of a 4-instance type would otherwise
+  // "complete" a rescue tube and wrongly satisfy the lock. Instance counts
+  // are conserved by pours, so summing each type across all containers
+  // gives its true board-wide total to compare against.
+  const totalsByType = new Map();
+  for (const c of next.containers) {
+    for (const e of c.stack) {
+      totalsByType.set(e, (totalsByType.get(e) || 0) + 1);
+    }
+  }
   const completedTypes = new Set();
   for (const c of next.containers) {
-    if (isContainerComplete(c)) completedTypes.add(c.stack[0]);
+    const type = c.stack[0];
+    if (type !== undefined && c.stack.length === totalsByType.get(type) && c.stack.every((e) => e === type)) {
+      completedTypes.add(type);
+    }
   }
   let changed = false;
   next.containers.forEach((c, idx) => {
