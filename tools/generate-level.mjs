@@ -177,12 +177,14 @@ export function generateLevel(cfg) {
       const requires = pick(rng, candidateTypes);
       usedSortTypes.add(requires);
       // Any container index (0..poolCount-1) not already chosen for a lock,
-      // and whose current contents don't include `requires` (hard rule §4.1).
+      // not empty (a lock on an empty container conceals nothing), and whose
+      // current contents don't include `requires` (hard rule §4.1).
       const eligible = containers
         .map((c, idx) => idx)
         .filter(
           (idx) =>
             !lockPlan.some((l) => l.index === idx) &&
+            containers[idx].stack.length > 0 &&
             !containers[idx].stack.includes(requires)
         );
       if (!eligible.length) continue;
@@ -192,7 +194,7 @@ export function generateLevel(cfg) {
     for (let i = 0; i < neighborLockCount; i++) {
       const eligible = containers
         .map((c, idx) => idx)
-        .filter((idx) => !lockPlan.some((l) => l.index === idx));
+        .filter((idx) => !lockPlan.some((l) => l.index === idx) && containers[idx].stack.length > 0);
       if (!eligible.length) break;
       const index = pick(rng, eligible);
       lockPlan.push({ index, type: 'neighbor' });

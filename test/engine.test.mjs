@@ -333,6 +333,28 @@ test('viewOf hides non-top emojis in blind levels until revealed', () => {
   assert.equal(tokens[2].hidden, true);
 });
 
+test('viewOf reveals the whole contiguous top run in blind levels, not just the top cell', () => {
+  const level = basicLevel({
+    blind: true,
+    containers: [
+      // Bottom -> top: a buried 🐙, then a run of three 🐡 at the top —
+      // the two 🐡 below the top one are provably the same as the visible
+      // top and are not genuine hidden information.
+      { stack: ['🐙', '🐡', '🐡', '🐡'] },
+      { stack: [] },
+      { stack: [] },
+      { stack: [] },
+    ],
+  });
+  const session = createSession(level);
+  const view = viewOf(session);
+  const tokens = view[0].tokens;
+  assert.equal(tokens[0].hidden, true); // buried 🐙, not part of the top run
+  assert.equal(tokens[1].hidden, false); // part of the top 🐡 run
+  assert.equal(tokens[2].hidden, false); // part of the top 🐡 run
+  assert.equal(tokens[3].hidden, false); // the top itself
+});
+
 test('a full single-type container is reported complete', () => {
   const state = createState(basicLevel({ containers: [{ stack: ['🐠', '🐠', '🐠', '🐠'] }, { stack: [] }, { stack: [] }, { stack: [] }] }));
   assert.equal(isContainerComplete(state.containers[0]), true);

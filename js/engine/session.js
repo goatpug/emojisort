@@ -163,10 +163,15 @@ export function viewOf(session) {
     // cell is provably the same emoji as the visible top) — display it fully
     // revealed even if some instance never individually surfaced as top.
     const complete = isContainerComplete(c);
+    // A contiguous run of the same emoji at the top is provably identical to
+    // the always-visible top cell, so none of it is genuine hidden
+    // information even if a given instance never individually surfaced.
+    const run = topRun(c);
+    const runStart = run ? c.stack.length - run.count : c.stack.length;
     const tokens = c.stack.map((emoji, i) => {
       const id = ids[i];
-      const isTop = i === c.stack.length - 1;
-      const hidden = !locked && level.blind && !complete && !isTop && !revealed.has(id);
+      const inTopRun = i >= runStart;
+      const hidden = !locked && level.blind && !complete && !inTopRun && !revealed.has(id);
       return { emoji, id, hidden };
     });
     return {

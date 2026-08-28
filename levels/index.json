@@ -124,7 +124,7 @@
       "id": "safari-16",
       "index": 16,
       "theme": "safari",
-      "par": 16,
+      "par": 21,
       "blind": false,
       "orientation": "vertical"
     },
@@ -140,7 +140,7 @@
       "id": "sweets-18",
       "index": 18,
       "theme": "sweets",
-      "par": 18,
+      "par": 23,
       "blind": false,
       "orientation": "horizontal"
     },
@@ -164,7 +164,7 @@
       "id": "flowers-21",
       "index": 21,
       "theme": "flowers",
-      "par": 20,
+      "par": 19,
       "blind": false,
       "orientation": "horizontal"
     },
@@ -180,7 +180,7 @@
       "id": "office-23",
       "index": 23,
       "theme": "office",
-      "par": 19,
+      "par": 22,
       "blind": false,
       "orientation": "vertical"
     },
@@ -188,7 +188,7 @@
       "id": "sweets-24",
       "index": 24,
       "theme": "sweets",
-      "par": 20,
+      "par": 19,
       "blind": false,
       "orientation": "horizontal"
     },
@@ -244,7 +244,7 @@
       "id": "aquatic-31",
       "index": 31,
       "theme": "aquatic",
-      "par": 21,
+      "par": 24,
       "blind": true,
       "orientation": "vertical"
     },
@@ -260,7 +260,7 @@
       "id": "flowers-33",
       "index": 33,
       "theme": "flowers",
-      "par": 24,
+      "par": 28,
       "blind": true,
       "orientation": "vertical"
     },
@@ -268,7 +268,7 @@
       "id": "safari-34",
       "index": 34,
       "theme": "safari",
-      "par": 21,
+      "par": 27,
       "blind": true,
       "orientation": "horizontal"
     },

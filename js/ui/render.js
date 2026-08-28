@@ -74,7 +74,11 @@ function renderContainer(view, index, level, themeMeta, opts) {
 
   if (index === opts.selectedIndex) el.classList.add('selected');
   if (index === opts.invalidIndex) el.classList.add('invalid-target');
-  if (c.complete) el.classList.add('complete');
+  // The rescue tube is scratch space, not a themed collection to sort — a
+  // checkmark there reads as "sort the rescue tube too," which isn't the
+  // point. Suppress the complete badge for it even though it still has to
+  // end up empty-or-matching to win.
+  if (c.complete && !c.rescue) el.classList.add('complete');
   if (c.rescue) el.classList.add('rescue');
 
   const showLocked = c.locked || opts.openingIndices.has(index);
@@ -101,20 +105,21 @@ function renderContainer(view, index, level, themeMeta, opts) {
     }
   }
 
-  if (!c.locked) {
-    for (let i = 0; i < c.tokens.length; i++) {
+  // Slots always render at full capacity — even while locked — so the cover/
+  // barrier overlay spans the container's true length instead of collapsing
+  // it down to nothing (a locked container has no visible tokens, but it
+  // still occupies its full concealed length).
+  for (let i = 0; i < c.capacity; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'slot';
+    if (!c.locked && i < c.tokens.length) {
       const t = c.tokens[i];
-      const slot = document.createElement('div');
-      slot.className = 'slot';
       const span = document.createElement('span');
       span.className = 'token' + (t.hidden ? ' hidden-token' : '');
       span.textContent = t.hidden ? '❓' : t.emoji;
       slot.appendChild(span);
-      el.appendChild(slot);
     }
-    for (let i = c.tokens.length; i < c.capacity; i++) {
-      el.appendChild(document.createElement('div')).className = 'slot';
-    }
+    el.appendChild(slot);
   }
 
   el.addEventListener('click', () => opts.onSelect(index));
